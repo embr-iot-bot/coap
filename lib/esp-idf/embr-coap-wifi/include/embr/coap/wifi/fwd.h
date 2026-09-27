@@ -5,7 +5,7 @@
 
 #include <expected>
 
-namespace embr {
+namespace embr::coap {
 
 }
 

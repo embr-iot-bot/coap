@@ -1,11 +1,13 @@
 version: "0.1.0"
-description: "embr::wifi (dev)"
+description: "embr::coap::wifi (dev)"
 tags:
   - wifi
 dependencies:
   embr:
     git: git@github.com:malachi-iot/embr.git
     version: v0.4.8
+  embr-coap:
+    override_path: ../embr-coap
   embr-net:
     git: https://github.com/embr-iot/net
     version: dev

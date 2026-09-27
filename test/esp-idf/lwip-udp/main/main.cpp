@@ -1,4 +1,3 @@
-#include <embr/wifi/fwd.h>
 #include <embr/esp-idf/net/fwd.h>
 #include <embr/esp-idf/wifi/fwd.h>
 #include <wifi-console.h>

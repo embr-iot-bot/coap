@@ -1,14 +1,21 @@
 dependencies:
   espressif/console_simple_init: ^1.1.0
-  adafruit_boards:
+  embr-bmgr:
     git: git@github.com:embr-iot/esp-bmgr
-    path: adafruit_boards
+    path: lib/embr-bmgr
     version: dev
   embr-bmgr-lvgl:
     git: git@github.com:embr-iot/esp-bmgr
     path: lib/embr-bmgr-lvgl
+    # 27SEP26 DEBT: Have to do this because embr-bmgr-lvgl gets upset if
+    # LCD support isn't present.  Although reasonable, for such a core
+    # mechanism perhaps we want some kind of pass-through behavior and
+    # let things compile anyway - maybe a pragma message if we can?
+    matches:
+      - if: '$CONFIG{ESP_BOARD_DEV_DISPLAY_LCD_SUPPORT} == True'
     version: dev
   embr-coap:
-    path: ../../../../tools/esp-idf/components/embr-coap
-  embr-wifi:
-    path: ../../../../lib/esp-idf/embr-wifi
+    path: ../../../../lib/esp-idf/embr-coap
+  embr-net:
+    git: https://github.com/embr-iot/net
+    version: dev
