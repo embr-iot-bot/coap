@@ -59,7 +59,7 @@ static void _esp_now_init()
 
         int c = decoder.in().sbumpc();
 
-        ESP_LOGI(TAG, "c = %c", c);
+        ESP_LOGI(TAG, "pressed = %c", c);
 
         bool pressed;
 
@@ -80,13 +80,10 @@ static void _esp_now_init()
         }
 
 #ifdef CONFIG_ESP_BOARD_DEV_LED_STRIP_SUPPORT
-        //if constexpr(devtool::led_strip.supported)
         {
-            using namespace devtool;
-        
             const color c = pressed ?
-                core::mac_to_color(esp_now_info->src_addr) :
-                core::mac_to_color(wifi::get_mac());
+                test::mac_to_color(esp_now_info->src_addr) :
+                colors::black;
 
             ESP_ERROR_CHECK(set_pixel(c));
             ESP_ERROR_CHECK(led_strip.refresh());

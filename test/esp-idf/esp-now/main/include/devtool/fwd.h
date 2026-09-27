@@ -23,23 +23,16 @@ using namespace embr::esp_idf::wifi;
 
 }
 
-namespace devtool::inline core {
+namespace embr::inline test {
 
 struct color;
+
+esp_err_t set_pixel(const color&);
 
 extern embr::bmgr::dev_led_strip led_strip;
 
 // DEBT: Make this configurable.  These dudes can be bright!
 static constexpr float led_intensity = 0.2;
-
-esp_err_t set_pixel(const color&);
-
-}
-
-inline namespace test {
-
-// 26SEP26 DEBT: Part of debt where we misused 'devtool' as described above
-using namespace devtool::core;
 
 }
 

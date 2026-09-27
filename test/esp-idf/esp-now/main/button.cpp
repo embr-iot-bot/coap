@@ -46,8 +46,6 @@ void callback(void* arg, void* usr_data)
     {
         case BUTTON_PRESS_DOWN:
         {
-            using namespace devtool;
-
             encoder << payload << 1 << ++send_counter;
 
             // DEBT: Still need more elegant solution than this
@@ -58,11 +56,10 @@ void callback(void* arg, void* usr_data)
             ESP_ERROR_CHECK(esp_now_send(wifi::broadcast_mac, out_u, pos));
 
 #ifdef CONFIG_ESP_BOARD_DEV_LED_STRIP_SUPPORT
-            //if constexpr(led_strip.supported)
-            {
-                ESP_ERROR_CHECK(led_strip.set_pixel(0, 0, 255 * led_intensity, 0));
-                ESP_ERROR_CHECK(led_strip.refresh());
-            }
+            const color c = mac_to_color(wifi::get_mac());
+
+            ESP_ERROR_CHECK(set_pixel(c));
+            ESP_ERROR_CHECK(led_strip.refresh());
 #endif
 
         }
@@ -80,21 +77,13 @@ void callback(void* arg, void* usr_data)
             // DEBT: Still need more elegant solution than this
             int pos = encoder.out().pubseekoff(0, estd::ios_base::cur);
 
-            ESP_LOGI(TAG, "callback: pos=%d", pos);
+            ESP_LOGD(TAG, "callback: pos=%d", pos);
 
             ESP_ERROR_CHECK(esp_now_send(wifi::broadcast_mac, out_u, pos));
 
-            using namespace devtool;
-
-            [[maybe_unused]]
-            const color c = core::mac_to_color(wifi::get_mac());
-
 #ifdef CONFIG_ESP_BOARD_DEV_LED_STRIP_SUPPORT
-            //if constexpr(led_strip.supported)
-            {
-                ESP_ERROR_CHECK(set_pixel(c));
-                ESP_ERROR_CHECK(led_strip.refresh());
-            }
+            ESP_ERROR_CHECK(set_pixel(colors::black));
+            ESP_ERROR_CHECK(led_strip.refresh());
 #endif
         }
 

@@ -6,12 +6,19 @@
 #include <cstdint>
 #include <tuple>
 
-namespace devtool::inline core {
+namespace embr::inline test {
 
 struct color
 {
     float r, g, b;
 };
+
+namespace colors {
+
+constexpr color black   {0, 0, 0};
+constexpr color lime    {0, 1, 0};
+constexpr color green   (0, 0.5, 0);
+}
 
 color mac_to_color(const uint8_t* mac);
 

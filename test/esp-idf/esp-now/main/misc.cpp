@@ -11,7 +11,7 @@ using namespace embr;
 
 static const char* TAG = "devtool::misc";
 
-namespace devtool::inline core {
+namespace embr::inline test {
 
 color mac_to_color(const uint8_t* mac)
 {
@@ -54,14 +54,15 @@ void rgb_init()
 
         assert(it->is_valid());
 
-        devtool::led_strip = *it;
+        led_strip = *it;
 
+        /*
         const devtool::color c = devtool::mac_to_color(wifi::get_mac());
 
         ESP_LOGI(TAG, "mac_to_color: rgb = %f %f %f", c.r, c.g, c.b);
 
         ESP_ERROR_CHECK(set_pixel(c));
-        ESP_ERROR_CHECK(it->refresh());
+        ESP_ERROR_CHECK(it->refresh()); */
     }
 #endif
 }
