@@ -7,4 +7,11 @@ dependencies:
   coap:
     git: git@github.com:embr-iot/coap.git
     version: dev
+  #embr-coap-wifi:
+  #  git: git@github.com:embr-iot/coap.git
+  # Doesn't work, relative pathing for embr-coap itself dies
+  #  path: lib/esp-idf/embr-coap-wifi
+  # Doesn't work, pulls down top level again
+  #  override_path: lib/esp-idf/embr-coap-wifi
+  #  version: dev
 

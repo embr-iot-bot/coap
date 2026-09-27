@@ -7,6 +7,7 @@ dependencies:
     git: git@github.com:malachi-iot/embr.git
     version: v0.4.8
   embr-coap:
+    # FIX: PGESP-74 things make this blow up
     override_path: ../embr-coap
   embr-net:
     git: https://github.com/embr-iot/net
