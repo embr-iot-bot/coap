@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
 if(ESP_PLATFORM)
-    list(APPEND EXTRA_COMPONENT_DIRS ${CMAKE_CURRENT_LIST_DIR}/tools/esp-idf/components)
-    include(${CMAKE_CURRENT_LIST_DIR}/tools/esp-idf/components/embr-coap/CMakeLists.txt)
+    # 90% sure this just doesn't work
+    #list(APPEND EXTRA_COMPONENT_DIRS ${CMAKE_CURRENT_LIST_DIR}/tools/esp-idf/components)
+
+    include(${CMAKE_CURRENT_LIST_DIR}/lib/esp-idf/embr-coap/CMakeLists.txt)
 else()
     set(EMBR_COAP_BUILD_TESTS OFF CACHE BOOL "Build embr tests")
 

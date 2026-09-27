@@ -1,4 +1,5 @@
-include(${CMAKE_CURRENT_LIST_DIR}/../../../cmake/setvars.cmake)
+# 27SEP26 DEBT: PGESP-40 PGESP-54 we'd prefer a "pure cmake component"
+include(${CMAKE_CURRENT_LIST_DIR}/../../../tools/cmake/setvars.cmake)
 include(${ROOT_DIR}/src/sources.cmake)
 
 list(TRANSFORM SOURCE_FILES PREPEND ${ROOT_DIR}/src/)
@@ -6,5 +7,5 @@ list(TRANSFORM SOURCE_FILES PREPEND ${ROOT_DIR}/src/)
 idf_component_register(
     SRCS ${SOURCE_FILES}
     INCLUDE_DIRS ${ROOT_DIR}/src/include
-    REQUIRES estd
+    REQUIRES embr estd
     )

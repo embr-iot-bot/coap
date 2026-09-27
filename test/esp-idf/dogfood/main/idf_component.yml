@@ -2,9 +2,9 @@ version: "0.1.0"
 description: "Eat our own dogfood"
 tags:
   - coap
-#dependencies:
+dependencies:
 #  malachi-iot/estd: "0.8.12"
-#  coap:
-#    git: git@github.com:embr-iot/coap.git
-#    version: dev
+  coap:
+    git: git@github.com:embr-iot/coap.git
+    version: dev
 

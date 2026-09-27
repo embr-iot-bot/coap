@@ -1,9 +1,10 @@
 dependencies:
   espressif/console_simple_init: ^1.1.0
   embr-coap:
-    path: ../../../../tools/esp-idf/components/embr-coap
-  embr-wifi:
-    path: ../../../../lib/esp-idf/embr-wifi
+    path: ../../../../lib/esp-idf/embr-coap
+  embr-net:
+    git: https://github.com/embr-iot/net
+    version: dev
   embr-coap-synthetic:
     path: ../../../../lib/esp-idf/embr-coap-synthetic
   embr-bmgr:
