@@ -1,0 +1,14 @@
+menu "embr::coap: lwip test"
+
+    # EXPERIMENTAL, see if we can disable LVGL examples this way instead
+    # of in sdkconfig.defaults since we don't always have lvgl anyway
+    # Seems to work well
+    config LV_BUILD_EXAMPLES
+        bool
+        default n
+
+    config LV_BUILD_DEMOS
+        bool
+        default n
+
+endmenu

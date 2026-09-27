@@ -7,6 +7,11 @@ dependencies:
   coap:
     git: git@github.com:embr-iot/coap.git
     version: dev
+
+  #embr-net:
+  #  git: https://github.com/embr-iot/net
+  #  version: dev
+
   #embr-coap-wifi:
   #  git: git@github.com:embr-iot/coap.git
   # Doesn't work, relative pathing for embr-coap itself dies

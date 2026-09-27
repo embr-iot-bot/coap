@@ -5,6 +5,10 @@ CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
 CONFIG_PM_ENABLE=y
 CONFIG_PM_DFS_INIT_AUTO=y
 
+CONFIG_ESP_WIFI_SOFTAP_SUPPORT=n
+# EXPERIMENTAL
+CONFIG_ESP_WIFI_SLP_BEACON_LOST_OPT=y
+
 # 26SEP26 MB DEBT: These are supposed to flow down from my bmgr but doesn't seem to.
 # Also if not using my own bmgr it won't anyway.  However, will create warnings for non
 # LVGL situations
