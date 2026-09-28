@@ -16,10 +16,21 @@
 
 namespace embr::wifi {
 
-// 26SEP26 DEBT: Kinda crude
-constexpr const uint8_t* broadcast_mac = ethernet::addr::broadcast.data();
+namespace addr {
+
+// 28SEP26 DEBT: Kinda crude
+constexpr const uint8_t* broadcast = ethernet::addr::broadcast.data();
+
+}
+
+// 28SEP26 DEBT: We'd prefer embr::inline idf::wifi but that causes ambiguities
+// with regular true non-idf embr::wifi.  Trailing inline idf does the job but
+// feels counter intuitive
+inline namespace idf {
 
 using namespace embr::esp_idf::wifi;
+
+}
 
 }
 
