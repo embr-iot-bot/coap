@@ -27,10 +27,8 @@ using namespace embr;
 esp_err_t button_init();
 void rgb_init();
 
-// DEBT: Put some of this into embr::net
 static void _esp_now_init()
 {
-    ESP_ERROR_CHECK(esp_now_init());
     ESP_ERROR_CHECK(esp_now_register_recv_cb([](
         const esp_now_recv_info_t* esp_now_info,
         const uint8_t* data, int data_len)
@@ -97,12 +95,6 @@ static void _esp_now_init()
             });
 #endif
     }));
-
-    esp_now_peer_info_t peer{};
-    //peer->channel = CONFIG_ESPNOW_CHANNEL;
-    peer.ifidx = WIFI_IF_STA;
-    memcpy(peer.peer_addr, ethernet::addr::broadcast.data(), ESP_NOW_ETH_ALEN);
-    ESP_ERROR_CHECK(esp_now_add_peer(&peer));
 }
 
 extern "C" void app_main(void)
@@ -114,8 +106,9 @@ extern "C" void app_main(void)
     ESP_ERROR_CHECK(esp_board_manager_init());
 
     ESP_ERROR_CHECK(wifi::preinit());
-    ESP_ERROR_CHECK(wifi::esp_now_init());
-    ESP_ERROR_CHECK(wifi::esp_now_start(1));
+    ESP_ERROR_CHECK(esp_idf::esp_now::init(1));
+    ESP_LOGI(TAG, "Phase 1");
+    ESP_ERROR_CHECK(esp_idf::esp_now::add_broadcast_peer());
 
 #ifdef CONFIG_ESP_BOARD_DEV_DISPLAY_LCD_SUPPORT
     ESP_ERROR_CHECK_WITHOUT_ABORT(embr_lvgl_init());
