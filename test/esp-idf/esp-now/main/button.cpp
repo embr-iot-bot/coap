@@ -53,7 +53,7 @@ void callback(void* arg, void* usr_data)
 
             ESP_LOGD(TAG, "callback: pos=%d", pos);
 
-            ESP_ERROR_CHECK(esp_now_send(wifi::addr::broadcast, out_u, pos));
+            ESP_ERROR_CHECK(esp_now_send(wifi::broadcast_mac, out_u, pos));
 
 #ifdef CONFIG_ESP_BOARD_DEV_LED_STRIP_SUPPORT
             const color c = mac_to_color(wifi::get_mac());
@@ -79,7 +79,7 @@ void callback(void* arg, void* usr_data)
 
             ESP_LOGD(TAG, "callback: pos=%d", pos);
 
-            ESP_ERROR_CHECK(esp_now_send(wifi::addr::broadcast, out_u, pos));
+            ESP_ERROR_CHECK(esp_now_send(wifi::broadcast_mac, out_u, pos));
 
 #ifdef CONFIG_ESP_BOARD_DEV_LED_STRIP_SUPPORT
             ESP_ERROR_CHECK(set_pixel(colors::black));

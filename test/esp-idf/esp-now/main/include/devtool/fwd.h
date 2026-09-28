@@ -9,28 +9,10 @@
 // DEBT: Named this folder 'devtool' out of habit, but that's inaccurate for this ESP-NOW
 // specific test
 
-// DEBT: Consider embr::inline esp_idf::wifi - however that may collide with legacy
-// embr things.  Perhaps put it all into embr::esp_idf::wifi then alias it in?
-// experimenting with that
-// DEBT: Put this into embr::net
-
 namespace embr::wifi {
 
-namespace addr {
-
-// 28SEP26 DEBT: Kinda crude
-constexpr const uint8_t* broadcast = ethernet::addr::broadcast.data();
-
-}
-
-// 28SEP26 DEBT: We'd prefer embr::inline idf::wifi but that causes ambiguities
-// with regular true non-idf embr::wifi.  Trailing inline idf does the job but
-// feels counter intuitive
-inline namespace idf {
-
-using namespace embr::esp_idf::wifi;
-
-}
+// Crudely, we prefer pointer here over std::array
+constexpr const uint8_t* broadcast_mac = wifi::addr::broadcast.data();
 
 }
 
