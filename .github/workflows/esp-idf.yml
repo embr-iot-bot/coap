@@ -14,20 +14,11 @@ jobs:
         version: [v5.4.4, v5.5.5, v6.0.3, v6.1]
         target: [esp32, esp32s3, esp32c3, esp32c6]
         include:
-        - version: v6.0.3
-          target: esp32
+        - target: esp32
           qemu: true
-        - version: v6.0.3
-          target: esp32s3
+        - target: esp32c3
           qemu: true
-        - version: v6.0.3
-          target: esp32c3
-          qemu: true
-        - version: v6.1
-          target: esp32
-          qemu: true
-        - version: v6.1
-          target: esp32c3
+        - target: esp32s3
           qemu: true
 
     steps:
@@ -42,25 +33,20 @@ jobs:
         path: 'test/esp-idf/catch'
         command: "idf.py build"
 
-    # Catch2 success marker checked after qemu.
+    # Catch2 under QEMU; pytest-embedded stops QEMU once tests report success.
     - name: "qemu"
-      timeout-minutes: 2
+      timeout-minutes: 5
       if: matrix.qemu
       uses: espressif/esp-idf-ci-action@v1
       with:
         esp_idf_version: ${{ matrix.version }}
         target: ${{ matrix.target }}
         path: 'test/esp-idf/catch'
-        command: idf.py qemu --qemu-extra-args="-no-reboot" | tee qemu_output.txt
-
-    - name: Catch output inspection
-      if: matrix.qemu
-      working-directory: test/esp-idf/catch
-      run: |
-        set -euo pipefail
-        if ! grep -q "Test passed\." qemu_output.txt; then
-          echo "QEMU Catch run did not report success"
-          cat qemu_output.txt
-          exit 1
-        fi
-        echo "QEMU Catch marker found"
+        command: >-
+          python -m pip install -r requirements.txt &&
+          pytest pytest_catch2.py
+          --embedded-services idf,qemu
+          --target ${{ matrix.target }}
+          --app-path .
+          --build-dir build
+          --timeout=60

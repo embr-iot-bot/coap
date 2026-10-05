@@ -1,0 +1,4 @@
+esptool>=5
+pytest-embedded-idf~=2.9
+pytest-embedded-qemu~=2.9
+pytest-timeout~=2.4
