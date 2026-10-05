@@ -13,11 +13,12 @@ jobs:
       matrix:
         cxx_std: [17, 20, 23]
         build_type: [Debug]
-        compiler: [gcc]
+        compiler:
+          - { cc: gcc, cxx: g++ }
 
     env:
-      CC: ${{ matrix.compiler }}
-      CXX: g++
+      CC: ${{ matrix.compiler.cc }}
+      CXX: ${{ matrix.compiler.cxx }}
       CPM_SOURCE_CACHE: ~/.cache/cpm
 
     steps:
@@ -29,7 +30,7 @@ jobs:
     - uses: actions/cache@v5
       with:
         path: ${{ env.CPM_SOURCE_CACHE }}
-        key: ${{ runner.os }}-cpm-${{ hashFiles('src/CMakeLists.txt', 'test/catch/CMakeLists.txt', 'tools/cmake/CPM.cmake') }}
+        key: ${{ runner.os }}-cpm-${{ matrix.compiler.cc }}-${{ hashFiles('src/CMakeLists.txt', 'test/catch/CMakeLists.txt', 'tools/cmake/CPM.cmake') }}
 
     - id: cmake-build
       uses: threeal/cmake-action@v2.1.0
