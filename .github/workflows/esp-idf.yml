@@ -2,7 +2,7 @@ name: ESP-IDF
 
 on:
   push:
-    branches: [ "feat/**", "dev", "main" ]
+    branches: [ "feat/**", "dev" ]
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
 
     # Catch2 under QEMU; pytest-embedded stops QEMU once tests report success.
     - name: "qemu"
-      timeout-minutes: 5
+      timeout-minutes: 3
       if: matrix.qemu
       uses: espressif/esp-idf-ci-action@v1
       with:
@@ -49,4 +49,4 @@ jobs:
           --target ${{ matrix.target }}
           --app-path .
           --build-dir build
-          --timeout=60
+          --timeout=30
