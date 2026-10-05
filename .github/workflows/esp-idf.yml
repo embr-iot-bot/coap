@@ -20,10 +20,15 @@ jobs:
         - version: v6.0.3
           target: esp32s3
           qemu: true
+        - version: v6.0.3
+          target: esp32c3
+          qemu: true
         - version: v6.1
           target: esp32
           qemu: true
-        # esp32c3 QEMU previously hung past bootloader on sibling repos; omit for now.
+        - version: v6.1
+          target: esp32c3
+          qemu: true
 
     steps:
     - name: Checkout repo
@@ -37,7 +42,7 @@ jobs:
         path: 'test/esp-idf/catch'
         command: "idf.py build"
 
-    # Catch2 on-device suite (not Unity). Look for app_main success marker.
+    # Catch2 success marker checked after qemu.
     - name: "qemu"
       timeout-minutes: 2
       if: matrix.qemu
