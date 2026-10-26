@@ -6,7 +6,7 @@
 
 #include <embr/test/color.h>
 
-#include <embr/bmgr/dev_button.h>
+#include <embr/bmgr/dev/button.h>
 #include <embr/bmgr/iterator.h>
 
 #include <esp_log.h>
@@ -102,11 +102,11 @@ void callback(void* arg, void* usr_data)
 
 esp_err_t button_init()
 {
-    if constexpr(bmgr::dev_button::supported)
+    if constexpr(bmgr::dev::button::supported)
     {
         bmgr::device_name_iterator<bmgr::constants::device_type_button> it;
 
-        bmgr::dev_button b;
+        bmgr::dev::button b;
 
         ESP_RETURN_ON_ERROR(b.get(*it), TAG, "Cannot acquire first button");
         ESP_RETURN_ON_ERROR(

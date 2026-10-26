@@ -2,8 +2,8 @@
 
 #include <embr/test/color.h>
 
-#include <embr/bmgr/dev_button.h>
-#include <embr/bmgr/dev_led_strip.h>
+#include <embr/bmgr/dev/button.h>
+#include <embr/bmgr/dev/led_strip.h>
 #include <embr/bmgr/iterator.h>
 
 #include <esp_log.h>
@@ -14,7 +14,7 @@ static const char* TAG = "devtool::misc";
 
 namespace embr::inline test {
 
-embr::bmgr::dev_led_strip led_strip;
+embr::bmgr::dev::led_strip led_strip;
 
 #ifdef CONFIG_ESP_BOARD_DEV_LED_STRIP_SUPPORT
 esp_err_t set_pixel(const color& c)
@@ -34,9 +34,9 @@ void rgb_init()
     // 26SEP26 DEBT: I guess if constexpr doesn't help here as much as I thought.
     // reminds me of SFINAE type of things.
 #ifdef CONFIG_ESP_BOARD_DEV_LED_STRIP_SUPPORT
-    static_assert(bmgr::dev_led_strip::supported);
+    static_assert(bmgr::dev::led_strip::supported);
 
-    if constexpr(bmgr::dev_led_strip::supported)
+    if constexpr(bmgr::dev::led_strip::supported)
     {
         ESP_LOGI(TAG, "rgb_init: entry");
 
