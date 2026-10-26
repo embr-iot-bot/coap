@@ -1,6 +1,6 @@
 #pragma once
 
-#include <embr/bmgr/dev_led_strip.h>
+#include <embr/bmgr/dev/led_strip.h>
 
 #include <embr/esp-idf/wifi/fwd.h>
 
@@ -22,7 +22,7 @@ struct color;
 
 esp_err_t set_pixel(const color&);
 
-extern embr::bmgr::dev_led_strip led_strip;
+extern embr::bmgr::dev::led_strip led_strip;
 
 // DEBT: Make this configurable.  These dudes can be bright!
 static constexpr float led_intensity = 0.2;
