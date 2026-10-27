@@ -116,7 +116,9 @@ extern "C" void app_main(void)
 
     lvgl::async_call([] { devtool::lvgl::app::singleton.init(); });
 #endif
+#ifdef CONFIG_ESP_BOARD_DEV_BUTTON_SUPPORT
     ESP_ERROR_CHECK(button_init());
+#endif
     _esp_now_init();
     rgb_init();
 

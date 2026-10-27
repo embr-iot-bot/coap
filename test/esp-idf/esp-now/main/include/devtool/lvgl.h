@@ -7,8 +7,6 @@
 
 #include <embr/bmgr/lvgl.h>
 
-#include <array>
-
 namespace devtool::inline lvgl {
 
 lv_color_t mac_to_color(const embr::ethernet::mac&);
@@ -18,6 +16,8 @@ class app
     lv_obj_t* us_box_{};
     lv_obj_t* them_box_{};
     lv_obj_t* them_label_{};
+
+    void on_click(lv_event_t* event);
 
 public:
     static app singleton;

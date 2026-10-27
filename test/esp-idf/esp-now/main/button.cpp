@@ -14,6 +14,8 @@
 
 using namespace embr;
 
+#ifdef CONFIG_ESP_BOARD_DEV_BUTTON_SUPPORT
+
 namespace {
 
 int send_counter = 0;
@@ -102,21 +104,19 @@ void callback(void* arg, void* usr_data)
 
 esp_err_t button_init()
 {
-    if constexpr(bmgr::dev::button::supported)
-    {
-        bmgr::device_name_iterator<bmgr::constants::device_type_button> it;
+    bmgr::device_name_iterator<bmgr::constants::device_type_button> it;
 
-        bmgr::dev::button b;
+    bmgr::dev::button b;
 
-        ESP_RETURN_ON_ERROR(b.get(*it), TAG, "Cannot acquire first button");
-        ESP_RETURN_ON_ERROR(
-            b.register_cb(BUTTON_PRESS_DOWN, callback, (void*)*it),
-            TAG, "Cannot register callback");
-        ESP_RETURN_ON_ERROR(
-            b.register_cb(BUTTON_PRESS_UP, callback, (void*)*it),
-            TAG, "Cannot register callback");
-    }
+    ESP_RETURN_ON_ERROR(b.get(*it), TAG, "Cannot acquire first button");
+    ESP_RETURN_ON_ERROR(
+        b.register_cb(BUTTON_PRESS_DOWN, callback, (void*)*it),
+        TAG, "Cannot register callback");
+    ESP_RETURN_ON_ERROR(
+        b.register_cb(BUTTON_PRESS_UP, callback, (void*)*it),
+        TAG, "Cannot register callback");
 
     return ESP_OK;
 }
 
+#endif  // CONFIG_ESP_BOARD_DEV_BUTTON_SUPPORT

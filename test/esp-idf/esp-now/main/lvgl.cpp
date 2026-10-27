@@ -3,6 +3,10 @@
 
 #include <embr/esp-idf/wifi/fwd.h>
 
+#ifdef CONFIG_ESP_BOARD_DEV_LCD_TOUCH_SUPPORT
+#include <embr/bmgr/dev/lcd_touch.h>
+#include <embr/bmgr/iterator.h>
+#endif
 #include <embr/test/color.h>
 
 #include <estd/sstream.h>
@@ -66,6 +70,24 @@ void app::on_coap_recv(const ethernet::mac& source, bool pressed)
 void app::init()
 {
     lv_obj_t* screen = lv_screen_active();
+
+#ifdef CONFIG_ESP_BOARD_DEV_LCD_TOUCH_SUPPORT
+    lv_display_t* display = lv_display_get_default();
+    using iterator = bmgr::device_iterator<bmgr::constants::device_type_lcd_touch>;
+
+    iterator touch = iterator::begin();
+    embr::lvgl::add_touch(display, *touch);
+
+    lv_obj_add_event_cb(
+        screen,
+        [](lv_event_t* event)
+        {
+            auto self = static_cast<app*>(lv_event_get_user_data(event));
+            self->on_click(event);
+        },
+        LV_EVENT_CLICKED,
+        this);
+#endif
 
     lv_obj_set_style_bg_color(screen, lv_color_hex(0x202020), 0);
     lv_obj_set_style_text_color(screen, lv_color_white(), 0);

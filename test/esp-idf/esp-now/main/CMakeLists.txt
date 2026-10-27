@@ -4,7 +4,7 @@ if(IS_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../components/gen_bmgr_codes")
 endif()
 
 idf_component_register(
-    SRCS button.cpp lvgl.cpp main.cpp misc.cpp
+    SRCS button.cpp lvgl.cpp main.cpp misc.cpp touch.cpp
     INCLUDE_DIRS "include"
     REQUIRES
         #embr-bmgr
