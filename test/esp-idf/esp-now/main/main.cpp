@@ -89,7 +89,7 @@ static void _esp_now_init()
 #endif
 
 #if EMBR_BMGR_LVGL
-        ethernet::mac src_addr = wifi::make_mac(esp_now_info->src_addr);
+        ethernet::mac src_addr = ethernet::make_mac(esp_now_info->src_addr);
         lvgl::async_call([src_addr, pressed]
             {
                 devtool::lvgl::app::singleton.on_coap_recv(src_addr, pressed);

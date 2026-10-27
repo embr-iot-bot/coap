@@ -22,7 +22,7 @@ static const char* TAG = "devtool::lvgl";
 
 lv_color_t mac_to_color(const ethernet::mac& mac)
 {
-    const color c = core::mac_to_color(mac);
+    const color c = test::mac_to_color(mac);
 
     //ESP_LOGI(TAG, "mac_to_color: rgb = %f %f %f", c.r, c.g, c.b);
 

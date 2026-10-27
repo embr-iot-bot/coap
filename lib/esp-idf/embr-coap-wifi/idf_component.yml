@@ -3,9 +3,6 @@ description: "embr::coap::wifi (dev)"
 tags:
   - wifi
 dependencies:
-  embr:
-    git: git@github.com:malachi-iot/embr.git
-    version: v0.4.8
   embr-coap:
     # FIX: PGESP-74 things make this blow up
     override_path: ../embr-coap

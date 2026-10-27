@@ -6,5 +6,5 @@ dependencies:
   malachi-iot/estd: "0.8.12"
   embr:
     git: https://github.com/malachi-iot/embr.git
-    version: 6f7afb035d21d794449fed7baa9e55e04ad64610
+    version: v0.4.9
 
