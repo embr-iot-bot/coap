@@ -78,16 +78,22 @@ void app::init()
     iterator touch = iterator::begin();
     embr::lvgl::add_touch(display, *touch);
 
-    lv_obj_add_event_cb(
-        screen,
+    lv_obj_add_event_cb(screen,
         [](lv_event_t* event)
         {
             auto self = static_cast<app*>(lv_event_get_user_data(event));
-            self->on_click(event);
+            self->on_touch_pressed(event);
         },
-        LV_EVENT_CLICKED,
-        this);
-#endif
+        LV_EVENT_PRESSED, this);
+
+    lv_obj_add_event_cb(screen,
+        [](lv_event_t* event)
+        {
+            auto self = static_cast<app*>(lv_event_get_user_data(event));
+            self->on_touch_released(event);
+        },
+        LV_EVENT_RELEASED, this);
+    #endif
 
     lv_obj_set_style_bg_color(screen, lv_color_hex(0x202020), 0);
     lv_obj_set_style_text_color(screen, lv_color_white(), 0);

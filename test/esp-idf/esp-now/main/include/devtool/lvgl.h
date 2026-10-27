@@ -17,7 +17,8 @@ class app
     lv_obj_t* them_box_{};
     lv_obj_t* them_label_{};
 
-    void on_click(lv_event_t* event);
+    void on_touch_pressed(lv_event_t*);
+    void on_touch_released(lv_event_t*);
 
 public:
     static app singleton;
